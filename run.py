@@ -21,7 +21,7 @@ class Apps(db.Model):
     Android_Ver = db.Column(db.String(length=50), unique=True)
     
     def __repr__(self):
-        return '<App %r>' % self.App
+        return '<App %r>' % self.App1
 
 #Checks if the run.py file has executed directly and not imported
 if __name__ == '__main__':

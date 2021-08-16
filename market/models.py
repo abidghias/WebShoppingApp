@@ -2,7 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from market import db, login_manager
 from market import bcrypt
 from flask_login import UserMixin
-from flask import Flask
+from flask import Flask, app
 
 db = SQLAlchemy(app)
 
