@@ -13,56 +13,33 @@ Market Page
          <thead>
             <tr>
                <!-- Your Columns HERE -->
-               <th scope="col">ID</th>
-               <th scope="col">Name</th>
-               <th scope="col">Barcode</th>
+               <th scope="col">App</th>
+               <th scope="col">Category</th>
+               <th scope="col">Rating</th>
+               <th scope="col">Installs</th>
+               <th scope="col">Type</th>
                <th scope="col">Price</th>
-               <th scope="col">Options</th>
+               <th scope="col">Content_Rating</th>
+               <th scope="col">Genres</th>
             </tr>
          </thead>
          <tbody>
             <!-- Your rows inside the table HERE: -->
-            {% for app in apps %}
-            {% include 'includes/items_modals.html' %}
-            <tr>
-               <td>{{ app.App }}</td>
-               
-               <td>{{ app.Category }}</td>
-               
-               <td>{{ app.Rating }}</td>
-               
-               <td>{{ app.Reviews }}</td>
-               
-               <td>{{ app.Size }}</td>
-               
-               <td>{{ app.Installs }}</td>
-               
-               <td>{{ app.Type }}</td>
-               
-               <td>{{ app.Price }}</td>
-
-               <td>{{ app.Content_Rating }}</td>
-
-               <td>{{ app.Genres }}</td>
-
-               <td>{{ app.Last_uploaded }}</td>
-
-               <td>{{ app.Current_Ver }}</td>
-
-               <td>{{ app.Android_Ver }}</td>
-
-
-
-               <td>
-                  <button class="btn btn-outline btn-info" data-toggle="modal" data-target="#Modal-MoreInfo-{{ item.id }}">More Info</button>
-                  <button class="btn btn-outline btn-success" data-toggle="modal" data-target="#Modal-PurchaseConfirm-{{ item.id }}">Purchase this Item</button>
-               </td>
-            </tr>
+            {% for app_dets in Apps_list %} 
+               <td>{{ app_dets.App }}</td>
+               <td>{{ app_dets.Category }}</td>
+               <td>{{ app_dets.Rating }}</td>
+               <td>{{ app_dets.Installs }}</td>               
+               <td>{{ app_dets.Type }}</td>   
+               <td>{{ app_dets.Price }}</td>
+               <td>{{ app_dets.Content_Rating }}</td>
+               <td>{{ app_dets.Genres }}</td>
+            </tr> 
             {% endfor %}
          </tbody>
-      </table>
+      </table> 
    </div>
-   <!-- <div class="col-4">
+      <!--<div class="col-4">
         <h2>Owned Items</h2>
         <p></p>
         <br>
@@ -85,6 +62,6 @@ Market Page
              </div>
            {% endfor %}
         </div>
-   </div> -->
+   </div>
 </div>
 {% endblock %}

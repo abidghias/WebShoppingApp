@@ -5,7 +5,7 @@
 </style>
 
 <!-- More Info -->
-<div class="modal fade" id="Modal-MoreInfo-{{ item.id }}"
+<div class="modal fade" id="Modal-MoreInfo-{{ Apps.App }}"
      tabindex="-1"
      aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -13,7 +13,7 @@
       <div class="modal-header">
         <h5 class="modal-title" id="ModalLabel">
           <!-- -->
-          {{ item.name }}
+          {{ Apps.Category }}
         </h5>
         <button type="button" class="close"
                 data-dismiss="modal" aria-label="Close">
@@ -21,7 +21,7 @@
         </button>
       </div>
       <div class="modal-body">
-        {{ item.description }}
+        {{ Apps.Rating }}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary"
@@ -33,7 +33,7 @@
 </div>
 
 <!-- Purchase Confirm -->
-<div class="modal fade" id="Modal-PurchaseConfirm-{{ item.id }}"
+<div class="modal fade" id="Modal-PurchaseConfirm-{{ Apps.App }}"
      tabindex="-1"
      aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -52,14 +52,14 @@
         <form method="POST">
           {{ purchase_form.hidden_tag() }}
           <h4 class="text-center">
-            Are you sure you want to buy {{ item.name }} for {{ item.price }}$ ?
+            Are you sure you want to buy {{ Apps.App }} for {{ Apps.App }}$ ?
           </h4>
           <br>
           <h6 class="text-center">
             By clicking Purchase, you will purchase this item.
           </h6>
           <br>
-          <input id="purchased_item" name="purchased_item" type="hidden" value="{{item.name}}">
+          <input id="purchased_item" name="purchased_item" type="hidden" value="{{Apps.App}}">
           {{ purchase_form.submit(class="btn btn-outline-success btn-block") }}
         </form>
       </div>

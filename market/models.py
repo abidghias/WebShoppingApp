@@ -2,15 +2,14 @@ from flask_sqlalchemy import SQLAlchemy
 from market import db, login_manager
 from market import bcrypt
 from flask_login import UserMixin
-from flask import Flask, app
-
-db = SQLAlchemy(app)
+from flask import Flask
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    return Users.query.get(int(user_id))
 
-class User(db.Model, UserMixin):
+class Users(db.Model, UserMixin):
+    __tablename__ = 'Users'
     id = db.Column(db.Integer(), primary_key=True)
     username = db.Column(db.String(length=30), nullable=False, unique=True)
     email_address = db.Column(db.String(length=50), nullable=False, unique=True)
@@ -44,22 +43,20 @@ class User(db.Model, UserMixin):
 
 
 class Apps(db.Model):
+    __tablename__ = 'Apps'
     App = db.Column(db.String(length=90),    unique=True,primary_key=True)
-    Category = db.Column(db.String(length=50),    unique=True)
- 
-    Rating = db.Column(db.String(length=50),    unique=True)
-    Reviews = db.Column(db.String(length=50),    unique=True)
-    Size = db.Column(db.String(length=50),    unique=True)
-
-    Installs = db.Column(db.String(length=50),    unique=True)
-    Type = db.Column(db.String(length=50),   unique=True)
-    Price = db.Column(db.String(length=50),   unique=True)
-    Content_Rating =db.Column(db.String(length=50),   unique=True)
-
-    Genres = db.Column(db.String(length=50),   unique=True)
-    Last_uploaded = db.Column(db.String(length=50),  unique=True)
-    Current_Ver = db.Column(db.String(length=50),   unique=True)
-    Android_Ver = db.Column(db.String(length=50), unique=True)
+    Category = db.Column(db.String(length=50),    unique=False)
+    Rating = db.Column(db.String(length=50),    unique=False)
+    Reviews = db.Column(db.String(length=50),    unique=False)
+    Size = db.Column(db.String(length=50),    unique=False)
+    Installs = db.Column(db.String(length=50),    unique=False)
+    Type = db.Column(db.String(length=50),   unique=False)
+    Price = db.Column(db.String(length=50),   unique=False)
+    Content_Rating =db.Column(db.String(length=50),   unique=False)
+    Genres = db.Column(db.String(length=50),   unique=False)
+    Last_uploaded = db.Column(db.String(length=50),  unique=False)
+    Current_Ver = db.Column(db.String(length=50),   unique=False)
+    Android_Ver = db.Column(db.String(length=50), unique=False)
     
     def __repr__(self):
         return '<App %r>' % self.App
