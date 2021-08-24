@@ -1,9 +1,15 @@
+from logging import log
+import re
 from market import app
 from flask import render_template, redirect, url_for, flash, request
 from market.models import Apps, Users
 from market.forms import RegisterForm, LoginForm, PurchaseItemForm, SellItemForm
 from market import db
 from flask_login import login_user, logout_user, login_required, current_user
+import logging
+
+
+logger = logging.getLogger()
 
 @app.route('/')
 @app.route('/home')
@@ -43,6 +49,17 @@ def market_page():
         #owned_items = Apps.query.filter_by(owner=current_user.id)
         return render_template('market.html', Apps_list=Apps_list, purchase_form=purchase_form, selling_form=selling_form)
 
+@app.route('/app_info', methods=['GET'])
+def app_info():
+    if request.method == "GET":
+        App_info = Apps.query.all()
+        logger.info(request.args['app_id'])
+        return render_template('appinfo.html',App_info=App_info)
+
+
+
+
+
 @app.route('/register', methods=['GET', 'POST'])
 def register_page():
     form = RegisterForm()
@@ -53,6 +70,7 @@ def register_page():
         db.session.add(user_to_create)
         db.session.commit()
         login_user(user_to_create)
+        logger.warning(' Username %s registered',form.username.data)
         flash(f"Account created successfully! You are now logged in as {user_to_create.username}", category='success')
         return redirect(url_for('market_page'))
     if form.errors != {}: #If there are not errors from the validations
@@ -70,6 +88,7 @@ def login_page():
                 attempted_password=form.password.data
         ):
             login_user(attempted_user)
+            logger.warning(' User %s logged in', form.username.data)
             flash(f'Success! You are logged in as: {attempted_user.username}', category='success')
             return redirect(url_for('market_page'))
         else:

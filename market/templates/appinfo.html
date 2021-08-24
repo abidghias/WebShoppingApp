@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}
-      Apps
+      Download Apps
 {% endblock %}
 
  {% block content %}
@@ -22,6 +22,7 @@
    <thead>
       <tr>
          <!-- Your Columns HERE -->
+         <th scope="col">App ID</th>
          <th scope="col">App</th>
          <th scope="col">Category</th>
          <th scope="col">Rating</th>
@@ -30,21 +31,22 @@
          <th scope="col">Price</th>
          <th scope="col">Content_Rating</th>
          <th scope="col">Genres</th>
-         
       </tr>
    </thead>
    <tbody>
       <!-- Your rows inside the table HERE: -->
-      {% for app_dets in Apps_list %} 
-         <td>{{ app_dets.App }}
-          
+      {% for app_dets in App_info %} 
+         {% if app_dets.app_id == 1 %}
+         <td>{{ app_dets.app_id}}</td>
+         <td>{{ app_dets.App }}</td>
          <td>{{ app_dets.Category }}</td>
          <td>{{ app_dets.Rating }}</td>
          <td>{{ app_dets.Installs }}</td>               
          <td>{{ app_dets.Type }}</td>   
          <td>{{ app_dets.Price }}</td>
          <td>{{ app_dets.Content_Rating }}</td>
-         <td>{{ app_dets.Genres }}  <a class="btn btn-sm btn-secondary" href="{{ url_for('app_info',app_id = app_dets.AppId)}}">Download</a></td></td>
+         <td>{{ app_dets.Genres }}</td>
+         {% endif %}
       </tr> 
       {% endfor %}
    </tbody>

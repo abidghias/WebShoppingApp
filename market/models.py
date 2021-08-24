@@ -44,6 +44,7 @@ class Users(db.Model, UserMixin):
 
 class Apps(db.Model):
     __tablename__ = 'Apps'
+    AppId = db.Column(db.Integer(), primary_key=True)
     App = db.Column(db.String(length=90),    unique=True,primary_key=True)
     Category = db.Column(db.String(length=50),    unique=False)
     Rating = db.Column(db.String(length=50),    unique=False)
