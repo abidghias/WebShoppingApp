@@ -36,7 +36,7 @@
    <tbody>
       <!-- Your rows inside the table HERE: -->
       {% for app_dets in Apps_list %} 
-         <td>{{ app_dets.App }}
+         <td><a class="btn btn-sm btn-secondary" href="{{ url_for('app_info',app_id = app_dets.AppId)}}">{{ app_dets.App }}</a>
           
          <td>{{ app_dets.Category }}</td>
          <td>{{ app_dets.Rating }}</td>
@@ -44,7 +44,7 @@
          <td>{{ app_dets.Type }}</td>   
          <td>{{ app_dets.Price }}</td>
          <td>{{ app_dets.Content_Rating }}</td>
-         <td>{{ app_dets.Genres }}  <a class="btn btn-sm btn-secondary" href="{{ url_for('app_info',app_id = app_dets.AppId)}}">Download</a></td></td>
+         <td>{{ app_dets.Genres }} </td></td>
       </tr> 
       {% endfor %}
    </tbody>

@@ -12,9 +12,6 @@
   
  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
 
-
-
-
 <body style="margin:20px auto">  
 <div class="container">
 
@@ -31,13 +28,16 @@
          <th scope="col">Price</th>
          <th scope="col">Content_Rating</th>
          <th scope="col">Genres</th>
+         <th scope="col">Last_uploaded</th>
+         <th scope="col">Current_Ver</th>
+         <th scope="col">Android_Ver</th>
       </tr>
    </thead>
    <tbody>
       <!-- Your rows inside the table HERE: -->
-      {% for app_dets in App_info %} 
-         {% if app_dets.app_id == 1 %}
-         <td>{{ app_dets.app_id}}</td>
+       {% for app_dets in App_info %} 
+         <!-- {% if app_dets.app_id == app_id %} -->
+         <td>{{ app_dets.AppId}}</td>
          <td>{{ app_dets.App }}</td>
          <td>{{ app_dets.Category }}</td>
          <td>{{ app_dets.Rating }}</td>
@@ -46,9 +46,12 @@
          <td>{{ app_dets.Price }}</td>
          <td>{{ app_dets.Content_Rating }}</td>
          <td>{{ app_dets.Genres }}</td>
-         {% endif %}
+         <td>{{ app_dets.Last_uploaded }}</td>
+         <td>{{ app_dets.Current_Ver }}</td>
+         <td>{{ app_dets.Android_Ver }}</td>
+         <!-- {% endif %} -->
       </tr> 
-      {% endfor %}
+       {% endfor %}
    </tbody>
 </table> 
 	  </div>

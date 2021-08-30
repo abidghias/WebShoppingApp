@@ -9,6 +9,9 @@ def load_user(user_id):
     return Users.query.get(int(user_id))
 
 class Users(db.Model, UserMixin):
+    """
+    Describes the database model for User's parameters 
+    """
     __tablename__ = 'Users'
     id = db.Column(db.Integer(), primary_key=True)
     username = db.Column(db.String(length=30), nullable=False, unique=True)
@@ -29,10 +32,10 @@ class Users(db.Model, UserMixin):
         return self.password
 
     @password.setter
-    def password(self, plain_text_password):
+    def password(self, plain_text_password): #performs a hash for the text passed so that It can be securely stored
         self.password_hash = bcrypt.generate_password_hash(plain_text_password).decode('utf-8')
 
-    def check_password_correction(self, attempted_password):
+    def check_password_correction(self, attempted_password): 
         return bcrypt.check_password_hash(self.password_hash, attempted_password)
 
     def can_purchase(self, item_obj):
@@ -43,6 +46,9 @@ class Users(db.Model, UserMixin):
 
 
 class Apps(db.Model):
+    """
+    Describes the database model for App's parameters
+    """
     __tablename__ = 'Apps'
     AppId = db.Column(db.Integer(), primary_key=True)
     App = db.Column(db.String(length=90),    unique=True,primary_key=True)

@@ -5,12 +5,21 @@ from market.models import Users
 
 
 class RegisterForm(FlaskForm):
+    """
+    Registers the user into the database by getting info 
+        - username 
+        - email_address
+        - password
+    
+    """
     def validate_username(self, username_to_check):
+        #checks if user already exists/registered
         user = Users.query.filter_by(username=username_to_check.data).first()
         if user:
             raise ValidationError('Username already exists! Please try a different username')
 
     def validate_email_address(self, email_address_to_check):
+        #control goes to 
         email_address = Users.query.filter_by(email_address=email_address_to_check.data).first()
         if email_address:
             raise ValidationError('Email Address already exists! Please try a different email address')
@@ -23,6 +32,11 @@ class RegisterForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
+    """
+    Logs the user in by performing validations 
+        - username 
+        - password
+    """
     username = StringField(label='User Name:', validators=[DataRequired()])
     password = PasswordField(label='Password:', validators=[DataRequired()])
     submit = SubmitField(label='Sign in')

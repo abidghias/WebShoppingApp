@@ -13,11 +13,11 @@ logger = logging.getLogger()
 
 @app.route('/')
 @app.route('/home')
-def home_page():
+def home_page(): #base template which renders home.html upon initialization
     return render_template('home.html')
 
 @app.route('/market', methods=['GET', 'POST'])
-@login_required
+@login_required #decorator used to ensure that markets can be viewed only if user is logged in 
 def market_page():
     purchase_form = PurchaseItemForm()
     selling_form = SellItemForm()
@@ -45,6 +45,7 @@ def market_page():
     #    return redirect(url_for('market_page'))
 
     if request.method == "GET":
+        #returns all the Apps info from DB
         Apps_list = Apps.query.all()
         #owned_items = Apps.query.filter_by(owner=current_user.id)
         return render_template('market.html', Apps_list=Apps_list, purchase_form=purchase_form, selling_form=selling_form)
@@ -52,7 +53,9 @@ def market_page():
 @app.route('/app_info', methods=['GET'])
 def app_info():
     if request.method == "GET":
-        App_info = Apps.query.all()
+        #returns the info for a particular app selected
+        app_id = request.args.get('app_id')
+        App_info = Apps.query.filter_by(AppId=app_id)
         logger.info(request.args['app_id'])
         return render_template('appinfo.html',App_info=App_info)
 
@@ -62,6 +65,7 @@ def app_info():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register_page():
+    #validating the user for registration
     form = RegisterForm()
     if form.validate_on_submit():
         user_to_create = Users(username=form.username.data,
@@ -81,6 +85,7 @@ def register_page():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login_page():
+    #validating the user for login
     form = LoginForm()
     if form.validate_on_submit():
         attempted_user = Users.query.filter_by(username=form.username.data).first()
@@ -98,6 +103,7 @@ def login_page():
 
 @app.route('/logout')
 def logout_page():
+    #logs the user out of the session
     logout_user()
     flash("You have been logged out!", category='info')
     return redirect(url_for("home_page"))
